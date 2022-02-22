@@ -2,8 +2,16 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
+const MariaDBStore = require('express-session-mariadb-store');
+const db = require('./database');
+const flash = require('connect-flash');
+
 // initializations
+
 const app = express();
+require('./lib/passport');
 
 // setings
 
@@ -23,9 +31,25 @@ app.set('view engine','.hbs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(passport.initialize());
+app.use(session({
+    store: new MariaDBStore({
+      pool: db.pool,
+    }),
+    secret: 'koombeaChanllenge',
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(passport.session());
+app.use(flash());
+
 
 // global variables
-app.use((req,res,next) => {
+
+app.use((req, res, next) => {
+    app.locals.message = req.flash('message');
+    app.locals.success = req.flash('success');
+    app.locals.user = req.user;
     next();
 });
 
