@@ -7,8 +7,17 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(30) NOT NULL,
     password VARCHAR(100) NOT NULL,
     fullname VARCHAR(100)
-    created_at timestamp NOT NULL current_timestamp,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT unique_email UNIQUE (email)
+);
+CREATE TABLE IF NOT EXISTS files(
+    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    path VARCHAR(150) NOT NULL,
+    nameFile VARCHAR(50) NOT NULL,
+    status VARCHAR (50) NOT NULL DEFAULT 'On hold',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id INT(11) NOT NULL,
+    CONSTRAINT `fk_users` FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS contacts(
@@ -19,9 +28,11 @@ CREATE TABLE IF NOT EXISTS contacts(
     address VARCHAR(200) NOT NULL,
     number_card VARCHAR(17) NOT NULL,
     franchise_card VARCHAR (50) NOT NULL,
-    user_id INT(11) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    file_id INT(11) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT `fk_users` FOREIGN KEY (user_id) REFERENCES users (id)
+    CONSTRAINT `fk_files` FOREIGN KEY (file_id) REFERENCES files (id)
 );
 CREATE TABLE session(
   sid                     VARCHAR(100) PRIMARY KEY NOT NULL,   

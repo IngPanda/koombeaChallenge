@@ -1,0 +1,33 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Path</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Accion</th>
+    </tr>
+  </thead>
+  <tbody>
+      {{#each files}}
+    <tr>
+      <th scope="row">{{id}}</th>
+      <td>{{nameFile}}</td>
+      <td>{{path}}</td>
+      <td>{{status}}</td>
+      <td>
+        <a class="btn btn-secondary" href="/contact/process/{{id}}">
+                        Procesar
+        </a>         
+      </td>
+    </tr>
+    {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No se ha guardado ningun contacto.</p>
+                <a href="/file/upload">Cargar archivo</a>
+            </div>
+        </div>
+    {{/each}}
+  </tbody>
+</table>

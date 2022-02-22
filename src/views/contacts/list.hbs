@@ -1,30 +1,35 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">ID</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Fecha de Nacimiento</th>
+      <th scope="col">Telefono</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Tarjeta de Credito</th>
+      <th scope="col">Franquicia</th>
+      <th scope="col">Email</th>
     </tr>
   </thead>
   <tbody>
+      {{#each contacts}}
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">{{id}}</th>
+      <td>{{name}}</td>
+      <td>{{date_birth}}</td>
+      <td>{{phone}}</td>
+      <td>{{address}}</td>
+      <td>{{number_card}}</td>
+      <td>{{franchise_card}}</td>
+      <td>{{email}}</td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    {{else}}
+        <div class="col-md-4 mx-auto">
+            <div class="card card-body text-center">
+                <p>No se ha guardado ningun contacto.</p>
+                <a href="/contacts/add">Cargar archivo</a>
+            </div>
+        </div>
+    {{/each}}
   </tbody>
 </table>

@@ -1,0 +1,45 @@
+<div class="container p-4">
+  <div class="row">
+
+    <div class="col-md-8 mx-auto">
+      <div class="card text-center">
+        <div class="card-header">
+        </div>
+        {{#if user}}
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h3>Bienvenido {{user.fullname}}</h3>
+                                <h4>{{user.email}}</h4>
+                                <a href="/file/upload" class="btn btn-primary m-4">
+                                    Guardar contactos   
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        {{else}}
+            <div class="card-body">
+                <form action="/user/signin" method="POST">
+                    <div class="form-group">
+                    <input type="text" name="email" placeholder="Correo" class="form-control" autofocus>
+                    </div>
+                    <div class="form-group">
+                    <input type="password" name="password" placeholder="Contraseña" class="form-control">
+                    </div>
+                    <button class="btn btn-primary btn-block">
+                    Entrar
+                    </button>
+                </form>
+            </div>
+        {{/if}}
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
