@@ -30,6 +30,7 @@
     "handlebars-helper-equal": "^1.0.0",
     "i": "^0.3.7",
     "joi": "^17.6.0",
+    "joi-phone-number": "^5.1.0",
     "joi-phone-number-extensions": "^1.1.0",
     "mariadb": "^2.5.6",
     "morgan": "^1.10.0",

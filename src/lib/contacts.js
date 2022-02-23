@@ -1,17 +1,17 @@
-const BaseJoi = require('joi');
-const JoiPhoneNumberExtensions = require('joi-phone-number-extensions');
-const Joi = BaseJoi.extend(JoiPhoneNumberExtensions);
+const Joi = require('joi');
+const myCustomJoi = Joi.extend(require('joi-phone-number'));
 
 const validateField = (inputData) => {
     const schema = Joi.object({
-        name: Joi.string().invalid('-').require(),
-        date_birth : Joi.string().isoDate().require(),
-        phone: Joi.phoneNumber().defaultRegion('US').type('MOBILE').format('E164').require(),
-        address: Joi.require(),
-        number_card: Joi.require(),
+        name: Joi.string().invalid('-').required(),
+        date_birth : Joi.string().isoDate().required(),
+        phone: myCustomJoi.string().phoneNumber({ defaultCountry: 'BE', format: 'e164' }).required(),
+        address: Joi.required(),
+        number_card: Joi.required(),
         email: Joi.string().email()
     });
-    schema.validate(inputData);
+    const validate = schema.validate(inputData);
+    return validate;
 };
 
 const processDataFile = async (datFile,fileId) => {
@@ -24,12 +24,11 @@ const processDataFile = async (datFile,fileId) => {
     const addressIndex = headers.indexOf('address');
     const numberCardIndex = headers.indexOf('credit_card');
     const emailIndex = headers.indexOf('email');
-    console.log(infoData);
-    // TODO VALIDATE DATA
+
     const contactsData = [];
     for(let i=0;i<infoData.length;i++){
         const item =  infoData[i];
-        contactsData.push({
+        const dataM = {
             name: item[nameIndex],
             date_birth: item[dateBirthIndex],
             phone: item[phoneIndex],
@@ -39,8 +38,13 @@ const processDataFile = async (datFile,fileId) => {
             email: item[emailIndex],
             // status: infoData[nameIndex],
             file_id: fileId,
-        });
+        };
+        
+        dataM.validate = validateField(dataM);
+        contactsData.push(dataM);
+        
     }
+    console.log(contactsData.map(m=>m.validate));
     return contactsData;
 };
 
