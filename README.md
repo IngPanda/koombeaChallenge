@@ -1,8 +1,5 @@
 # koombeaChallenge
 
-## _The Last Markdown Editor, Ever_
-
-
 Technical test for koombea
 
 ## System Requirements
