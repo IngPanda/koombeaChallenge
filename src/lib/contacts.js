@@ -19,10 +19,6 @@ const validateField = (inputData, emails) => {
         status: Joi.string().required(),
         number_card: Joi.string().required(),
         email: Joi.string().email().required(),
-        franchise_card: Joi.string().required(),
-        file_id: Joi.number(),
-    });
-    const validate = schema.validate(inputData);
     if(!validate.error)
         if(emails.includes(inputData.email))
             return { error: { message: 'the email must be unique' }};
@@ -58,7 +54,7 @@ const processDataFile = async (datFile,fileId,userId) => {
             date_birth: item[dateBirthIndex],
             phone: item[phoneIndex],
             address: item[addressIndex],
-            number_card: encrypt(item[numberCardIndex]),
+            number_card: item[numberCardIndex],
             franchise_card: visaCards.length ? visaCards[0].niceType : null,
             email: item[emailIndex],
                 status: 'Ok',
@@ -70,7 +66,7 @@ const processDataFile = async (datFile,fileId,userId) => {
             item[dateBirthIndex],
             item[phoneIndex],
             item[addressIndex],
-            item[numberCardIndex],
+            encrypt(item[numberCardIndex]),
             visaCards.length ? visaCards[0].niceType : '-',
             item[emailIndex],
             error.error ? 'Error -'+ error.error.message.replace(/[^a-z0-9 \.,_-]/gim,"") : 'Ok',
