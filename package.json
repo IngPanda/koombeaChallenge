@@ -21,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "binlookup": "^2.0.1",
     "connect-flash": "^0.1.1",
+    "credit-card-type": "^9.1.0",
     "csv-parse": "^5.0.4",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.2",
