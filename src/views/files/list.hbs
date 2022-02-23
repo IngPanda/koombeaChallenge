@@ -3,7 +3,6 @@
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Nombre</th>
-      <th scope="col">Path</th>
       <th scope="col">Estado</th>
       <th scope="col">Accion</th>
     </tr>
@@ -13,11 +12,10 @@
     <tr>
       <th scope="row">{{id}}</th>
       <td>{{nameFile}}</td>
-      <td>{{path}}</td>
       <td>{{status}}</td>
       <td>
-        <a class="btn btn-secondary" href="/contact/process/{{id}}">
-                        Procesar
+        <a class="btn btn-secondary" href={{pathButton}}>
+                        {{nameButton}}
         </a>         
       </td>
     </tr>

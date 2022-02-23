@@ -1,6 +1,12 @@
 const fs = require('fs'); 
 const parse = require('csv-parse');
 const path = require('path');
+
+var CryptoJS = require("crypto-js");
+
+const secretKey = 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3';
+
+
 const deleteFile = (filePath) => {
     fs.stat(filePath, function (err, stats) {
         console.log(stats);//here we got all information of file in stats variable
@@ -32,4 +38,17 @@ const readCsv = (filePath) => {
     });
 }
 
-module.exports = { readCsv, deleteFile };
+const encrypt = (text) => {
+
+    return CryptoJS.AES.encrypt(text,secretKey).toString();
+
+};
+
+const decrypt = (hash) => {
+
+    var bytes  = CryptoJS.AES.decrypt(hash, secretKey);
+    return  bytes.toString(CryptoJS.enc.Utf8);
+};
+
+
+module.exports = { readCsv, deleteFile, encrypt, decrypt };

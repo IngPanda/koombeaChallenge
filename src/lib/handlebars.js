@@ -1,8 +1,14 @@
+const  { DateTime } = require("luxon");
+const  { decrypt } = require('./utils');
 
 const helpers = {};
 
-helpers.compare = (a, b) => {
-    return a === b;
+helpers.timeformat = (savedTimestamp) => {
+    return DateTime.fromFormat(savedTimestamp, 'yyyy-MM-dd').toFormat('yyyy MMMML dd')
+};
+
+helpers.desencrycard = (cardnumber) => {
+    return decrypt(cardnumber);
 };
 
 module.exports = helpers;

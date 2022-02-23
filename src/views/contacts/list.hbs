@@ -9,6 +9,7 @@
       <th scope="col">Tarjeta de Credito</th>
       <th scope="col">Franquicia</th>
       <th scope="col">Email</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
@@ -16,12 +17,13 @@
     <tr>
       <th scope="row">{{id}}</th>
       <td>{{name}}</td>
-      <td>{{date_birth}}</td>
+      <td>{{ timeformat date_birth }}</td>
       <td>{{phone}}</td>
       <td>{{address}}</td>
-      <td>{{number_card}}</td>
+      <td>{{ desencrycard number_card }}</td>
       <td>{{franchise_card}}</td>
       <td>{{email}}</td>
+      <td>{{status}}</td>
     </tr>
     {{else}}
         <div class="col-md-4 mx-auto">
